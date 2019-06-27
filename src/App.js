@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route, BrowserRouter, Switch, Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+import Todos from './Todos'
+import Blog from './Blog'
+
+const Div = styled.div`
+  width: 60%;
+  height: auto;
+  margin: 4rem auto;
+  font-size: 1.5rem;
+
+  p {
+    font-size: 1rem;
+    text-decoration: none;
+  }
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Div>
+      <BrowserRouter>
+        <Route>
+          <div>
+            <Link to='/'>
+              <p>TODOS</p>
+            </Link>
+            <Link to='/blog'>
+              <p>BLOG</p>
+            </Link>
+          </div>
+          <Switch>
+            <Route exact path='/' component={Todos} />
+            <Route path='/blog' component={Blog} />
+          </Switch>
+        </Route>
+      </BrowserRouter>
+    </Div>
+  )
 }
 
-export default App;
+export default App

@@ -7,11 +7,19 @@ function Todos() {
   const [todo, setTodo] = useState('')
 
   useEffect(() => {
+    let mounted = true
     const callApi = async () => {
       const fetchTodos = await backend()
-      setTodos(fetchTodos)
+
+      if (mounted) {
+        setTodos(fetchTodos)
+      }
     }
     callApi()
+
+    return () => {
+      mounted = false
+    }
   }, [])
 
   const handleChange = e => {
